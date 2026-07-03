@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NIARAD — design preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14161F;--slate:#1B1E29;--slate-2:#222634;--line:#2C3142;--line-soft:#232838;--paper:#F4EEE0;--paper-ink:#2C2620;--paper-muted:#8C8270;--bright:#ECEEF6;--muted:#8B92A8;--dim:#5A6076;--gold:#E8A85C;--gold-soft:rgba(232,168,92,.12);--weak:#E2674C;--learning:#E0A24B;--strong:#4FC8A0;--cyan:#5AB0E0;--violet:#9B86E6;--r:14px;--rs:9px;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--bright);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;position:relative}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(900px 600px at 78% -10%,rgba(232,168,92,.06),transparent 60%),radial-gradient(700px 500px at -5% 110%,rgba(79,200,160,.05),transparent 60%);pointer-events:none}
+.shell{display:flex;height:100vh;position:relative;z-index:1}
+.rail{width:248px;flex-shrink:0;background:var(--slate);border-right:1px solid var(--line);padding:20px 16px;display:flex;flex-direction:column}
+.brand{display:flex;align-items:baseline;gap:8px;padding:6px 8px 18px}
+.brand h1{font-family:'Fraunces',serif;font-weight:500;font-size:26px;color:var(--bright)}
+.brand .tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--rs);color:var(--muted);font-size:14px;font-weight:500}
+.nav-item.active{background:var(--gold-soft);color:var(--gold)}
+.nav-item .count{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--gold);color:var(--ink);padding:1px 8px;border-radius:20px}
+.chip{margin-top:auto;display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:var(--rs);background:var(--ink);border:1px solid var(--line-soft);font-size:12px;color:var(--muted)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--strong);box-shadow:0 0 8px var(--strong)}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{display:flex;align-items:baseline;gap:14px;padding:22px 32px 16px;border-bottom:1px solid var(--line-soft)}
+.topbar h2{font-family:'Fraunces',serif;font-weight:500;font-size:22px}
+.topbar .sub{font-size:13px;color:var(--muted)}
+.pad{padding:26px 32px;overflow-y:auto}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted)}
+.strip{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.box{background:var(--slate);border:1px solid var(--line-soft);border-radius:var(--r);padding:16px 20px;min-width:120px}
+.box .num{font-family:'Fraunces',serif;font-size:30px;font-weight:600;line-height:1}
+.box .lbl{font-size:12px;color:var(--muted);margin-top:6px}
+.btn{font-size:13px;font-weight:600;padding:9px 16px;border-radius:var(--rs);border:1px solid var(--line);background:var(--slate-2);color:var(--bright);display:inline-flex;gap:8px;align-items:center}
+.btn-accent{background:var(--gold);border-color:var(--gold);color:#2A1C08}
+.deck{display:flex;flex-direction:column;align-items:center;gap:18px;margin:8px 0 26px}
+.face{width:100%;max-width:520px;min-height:280px;background:var(--paper);color:var(--paper-ink);border-radius:18px;padding:34px;display:flex;flex-direction:column;box-shadow:0 22px 50px -22px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.6);position:relative}
+.face::after{content:'';position:absolute;left:34px;right:34px;bottom:34px;top:86px;background-image:repeating-linear-gradient(transparent,transparent 31px,rgba(44,38,32,.07) 32px)}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--paper-muted);margin-bottom:14px;display:flex;justify-content:space-between}
+.qtext{font-family:'Fraunces',serif;font-weight:500;font-size:25px;line-height:1.4;position:relative;z-index:1}
+.hint{margin-top:auto;font-size:12px;color:var(--paper-muted);position:relative;z-index:1}
+.grades{display:flex;gap:10px;width:100%;max-width:520px}
+.g{flex:1;padding:12px 8px;border-radius:var(--rs);border:1px solid var(--line);background:var(--slate-2);display:flex;flex-direction:column;align-items:center;gap:2px}
+.g .l{font-size:13px;font-weight:600}.g .w{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:12px}
+.tile{background:var(--slate);border:1px solid var(--line-soft);border-radius:var(--r);padding:18px;display:flex;gap:16px;align-items:center}
+.tile .name{font-weight:600;font-size:14px}.tile .s{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:3px}
+.pill{display:inline-block;margin-top:6px;font-size:10px;font-weight:600;color:var(--weak);background:rgba(226,103,76,.12);padding:2px 8px;border-radius:20px}
+</style></head>
+<body><div class="shell">
+  <aside class="rail">
+    <div class="brand"><h1>NIARAD</h1><span class="tag">study agent</span></div>
+    <nav class="nav">
+      <div class="nav-item">Ask</div>
+      <div class="nav-item active">Study <span class="count">7</span></div>
+      <div class="nav-item">Vault</div>
+      <div class="nav-item">Files</div>
+    </nav>
+    <div class="chip"><span class="dot"></span><span>248 chunks indexed</span></div>
+  </aside>
+  <div class="main">
+    <div class="topbar"><h2>Study</h2><span class="sub">Your decks, your weak spots, and what's due now.</span></div>
+    <div class="pad">
+      <div class="strip">
+        <div class="box"><div class="num" style="color:var(--gold)">7</div><div class="lbl">Due now</div></div>
+        <div class="box"><div class="num">42</div><div class="lbl">Total cards</div></div>
+        <div class="box"><div class="num">96</div><div class="lbl">Reviews done</div></div>
+        <div class="box"><div class="num" style="color:var(--weak)">1</div><div class="lbl">Weak topics</div></div>
+      </div>
+
+      <div class="deck">
+        <div class="face">
+          <div class="kicker"><span>Operating Systems</span><span>3 / 7</span></div>
+          <div class="qtext">What condition makes a set of processes deadlock, and what circular property defines it?</div>
+          <div class="hint">↻ tap to reveal</div>
+        </div>
+        <div class="grades">
+          <div class="g"><span class="l">Again</span><span class="w">&lt;1d</span></div>
+          <div class="g"><span class="l">Hard</span><span class="w">1d</span></div>
+          <div class="g"><span class="l">Good</span><span class="w">6d+</span></div>
+          <div class="g"><span class="l">Easy</span><span class="w">long</span></div>
+        </div>
+      </div>
+
+      <div class="eyebrow">Mastery by topic</div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+</div>
+<script>
+const topics=[{t:'Algorithms',m:88,c:14,d:1,r:'48 reviews · avg 4.6'},{t:'Data Structures',m:71,c:12,d:2,r:'31 reviews · avg 4.1'},{t:'Operating Systems',m:20,c:10,d:4,r:'9 reviews · avg 2.0',weak:true},{t:'Databases',m:54,c:6,d:0,r:'8 reviews · avg 3.4'}];
+const color=m=>m>=75?'#4FC8A0':m>=45?'#E0A24B':'#E2674C';
+document.getElementById('grid').innerHTML=topics.map(o=>{
+  const sz=52,st=5,rad=(sz-st)/2,circ=2*Math.PI*rad,off=circ*(1-o.m/100);
+  return `<div class="tile"><svg width="${sz}" height="${sz}"><circle cx="26" cy="26" r="${rad}" fill="none" stroke="#2C3142" stroke-width="${st}"/><circle cx="26" cy="26" r="${rad}" fill="none" stroke="${color(o.m)}" stroke-width="${st}" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${off}" transform="rotate(-90 26 26)"/><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="Fraunces,serif" font-weight="600" font-size="16" fill="#ECEEF6">${o.m}</text></svg><div><div class="name">${o.t}</div><div class="s">${o.c} cards · ${o.d} due</div><div class="s">${o.r}</div>${o.weak?'<span class="pill">needs work</span>':''}</div></div>`;
+}).join('');
+</script>
+</body></html>
