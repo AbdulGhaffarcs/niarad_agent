@@ -4,7 +4,7 @@
 
 <br/>
 
-![Status](https://img.shields.io/badge/Status-Active_Development-000000?style=flat-square&logoColor=FFC800&labelColor=060910&color=00FFAA)
+![Status](https://img.shields.io/badge/Status-Active_Development-000000?style=flat-square&logoColor=00FFAA&labelColor=060910&color=1C2A3A)
 ![Version](https://img.shields.io/badge/Version-3.0_Full_Stack-000000?style=flat-square&labelColor=060910&color=00C8FF)
 ![Python](https://img.shields.io/badge/Python-3.10+-000000?style=flat-square&logo=python&logoColor=00FFAA&labelColor=060910&color=1C2A3A)
 ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-000000?style=flat-square&logo=fastapi&logoColor=00FFAA&labelColor=060910&color=1C2A3A)
