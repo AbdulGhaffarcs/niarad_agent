@@ -1,0 +1,11 @@
+{
+  "name": "niarad-frontend",
+  "buildCommand": "npm run build",
+  "startCommand": "npm start",
+  "envVars": [
+    {
+      "key": "NEXT_PUBLIC_API_URL",
+      "value": "https://your-render-backend.onrender.com"
+    }
+  ]
+}
