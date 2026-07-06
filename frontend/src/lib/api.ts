@@ -1,6 +1,6 @@
 // src/lib/api.ts — typed client for the NIARAD backend.
 
-export const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+export const API = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/+$/, '')
 
 export type Step = { tool: string; input: string; output: string }
 export type Intent = { category: string; reason: string; via: string }
@@ -25,33 +25,37 @@ async function j<T>(p: Promise<Response>): Promise<T> {
   if (!r.ok) throw new Error((await r.json().catch(() => ({}))).detail || r.statusText)
   return r.json()
 }
+const apiUrl = (path: string) => {
+  if (!API) throw new Error('NEXT_PUBLIC_API_URL is not configured')
+  return API + path
+}
 const post = (path: string, body: unknown) =>
-  fetch(API + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+  fetch(apiUrl(path), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
 
 export const api = {
   chat: (message: string, history: ChatMessage[] = []) =>
     j<ChatResponse>(post('/chat', { message, history })),
 
-  vaultStatus: () => j<VaultStatus>(fetch(API + '/vault/status')),
-  clearVault: () => j(fetch(API + '/vault/clear', { method: 'DELETE' })),
+  vaultStatus: () => j<VaultStatus>(fetch(apiUrl('/vault/status'))),
+  clearVault: () => j(fetch(apiUrl('/vault/clear'), { method: 'DELETE' })),
   upload: (file: File) => {
     const form = new FormData(); form.append('file', file)
     return j<{ success: boolean; chunks?: number; skipped?: boolean }>(
-      fetch(API + '/vault/upload', { method: 'POST', body: form }))
+      fetch(apiUrl('/vault/upload'), { method: 'POST', body: form }))
   },
 
-  files: () => j<{ files: GenFile[] }>(fetch(API + '/files/list')),
+  files: () => j<{ files: GenFile[] }>(fetch(apiUrl('/files/list'))),
 
   // spaced-repetition loop
   generate: (topic: string, count: number, text?: string) =>
     j<{ ok: boolean; generated?: number; added?: number; error?: string; sources?: string[] }>(
       post('/cards/generate', { topic, count, text })),
   due: (limit = 20, topic?: string) =>
-    j<{ cards: Card[] }>(fetch(API + `/cards/due?limit=${limit}${topic ? `&topic=${encodeURIComponent(topic)}` : ''}`)),
+    j<{ cards: Card[] }>(fetch(apiUrl(`/cards/due?limit=${limit}${topic ? `&topic=${encodeURIComponent(topic)}` : ''}`))),
   quizWeak: (count = 12) => j<{ cards: Card[]; weak_topics: string[] }>(post('/cards/quiz_weak', { count })),
   review: (card_id: number, grade: number) =>
     j<{ interval_days: number; next_due: string; lapsed: boolean }>(post('/cards/review', { card_id, grade })),
-  stats: () => j<Stats>(fetch(API + `/cards/stats`)),
+  stats: () => j<Stats>(fetch(apiUrl(`/cards/stats`))),
 }
 
 export const masteryColor = (m: number) =>

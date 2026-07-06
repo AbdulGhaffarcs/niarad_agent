@@ -93,7 +93,7 @@ export default function ChatView({ messages, setMessages, currentChatId, onFileG
     } catch {
       const errorMsg: Message = {
         role: 'assistant',
-        content: 'Couldn\'t reach the agent. Make sure the backend is running on port 8000.',
+        content: 'Couldn\'t reach the agent. Check that NEXT_PUBLIC_API_URL points to your deployed backend.',
         mode: 'ERROR',
         timestamp: Date.now(),
       }

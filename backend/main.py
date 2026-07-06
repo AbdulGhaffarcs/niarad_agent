@@ -16,13 +16,20 @@ load_dotenv()
 
 app = FastAPI(title="NIARAD Agent API", version="3.1.0")
 
+frontend_origins = [
+    origin.strip()
+    for origin in os.getenv("FRONTEND_ORIGINS", "").split(",")
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "https://*.vercel.app",
         "https://niarad-frontend.vercel.app",  # Update with your actual Vercel URL
+        *frontend_origins,
     ],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
