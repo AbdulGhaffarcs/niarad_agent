@@ -360,7 +360,7 @@ GET    /files/{file_id}                            download file
 
 ---
 
-## ` PHILOSOPHY**
+## ` PHILOSOPHY`
 
 NIARAD is built on the conviction that students deserve:
 
