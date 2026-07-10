@@ -21,7 +21,7 @@
 
 ---
 
-## `// OVERVIEW`
+## ` OVERVIEW`
 
 **NIARAD** is a full-stack AI study companion for students. It answers questions with intelligent tools (web search, code execution, your documents, and file generation) **and** runs a spaced-repetition loop that remembers what you struggle with, bringing topics back at scientifically optimal times using the SM-2 algorithm.
 
@@ -34,7 +34,7 @@ Free Groq API (no credit card). TypeScript type-safety. Modern UI/UX.
 
 ---
 
-## `// MIGRATION NOTE`
+## ` MIGRATION NOTE`
 
 **This project is the successor to [Kryptos-Niarad](https://github.com/AbdulGhaffarcs/Kryptos-Niarad)**, our original Streamlit-based RAG application. We've evolved it from a single-file prototype into a complete full-stack system with:
 
@@ -49,7 +49,7 @@ Free Groq API (no credit card). TypeScript type-safety. Modern UI/UX.
 
 ---
 
-## `// FEATURES`
+## ` FEATURES`
 
 <table>
 <tr>
@@ -82,7 +82,7 @@ Free Groq API (no credit card). TypeScript type-safety. Modern UI/UX.
 
 ---
 
-## `// TECH STACK`
+## ` TECH STACK`
 
 | Layer | Technology |
 |---|---|
@@ -98,7 +98,7 @@ Free Groq API (no credit card). TypeScript type-safety. Modern UI/UX.
 
 ---
 
-## `// PROJECT STRUCTURE`
+## ` PROJECT STRUCTURE`
 
 ```text
 niarad_agent/
@@ -146,7 +146,7 @@ niarad_agent/
 
 ---
 
-## `// WHAT'S NEW VS. THE ORIGINAL KRYPTOS-NIARAD`
+## ` WHAT'S NEW VS. THE ORIGINAL KRYPTOS-NIARAD`
 
 | Feature | Kryptos (Original) | NIARAD Agent (v3.0) |
 |---|---|---|
@@ -164,7 +164,7 @@ niarad_agent/
 
 ---
 
-## `// INSTALLATION & SETUP`
+## ` INSTALLATION & SETUP`
 
 ### Prerequisites
 
@@ -237,7 +237,7 @@ This demonstrates the SM-2 study loop without any external dependencies.
 
 ---
 
-## `// USAGE`
+## ` USAGE`
 
 ### **Ask (Agent Mode)**
 
@@ -270,7 +270,7 @@ Download anything the agent generated (PDFs, DOCX, code output).
 
 ---
 
-## `// SUPPORTED FILE TYPES`
+## ` SUPPORTED FILE TYPES`
 
 ```text
   .pdf    →  PyMuPDF loader (local text extraction)
@@ -284,7 +284,7 @@ Download anything the agent generated (PDFs, DOCX, code output).
 
 ---
 
-## `// API SURFACE`
+## ` API SURFACE`
 
 ### Chat & Agents
 
@@ -321,7 +321,7 @@ GET    /files/{file_id}                            download file
 
 ---
 
-## `// PERFORMANCE`
+## ` PERFORMANCE`
 
 | Query Type | Inference | Speed |
 |---|---|---|
@@ -337,7 +337,7 @@ GET    /files/{file_id}                            download file
 
 ---
 
-## `// TROUBLESHOOTING`
+## ` TROUBLESHOOTING`
 
 | Error | Fix |
 |---|---|
@@ -350,7 +350,7 @@ GET    /files/{file_id}                            download file
 
 ---
 
-## `// LEARNING RESOURCES`
+## ` LEARNING RESOURCES`
 
 - **SM-2 Algorithm**: Original paper by Wozniak — efficient spaced repetition
 - **FastAPI**: https://fastapi.tiangolo.com
@@ -360,7 +360,7 @@ GET    /files/{file_id}                            download file
 
 ---
 
-## `// PHILOSOPHY**
+## ` PHILOSOPHY**
 
 NIARAD is built on the conviction that students deserve:
 
