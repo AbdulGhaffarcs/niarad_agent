@@ -10,9 +10,12 @@ from pydantic import BaseModel
 import tempfile, os
 from dotenv import load_dotenv
 
+load_dotenv()
+
+from core.paths import GENERATED_FILES_DIR, ensure_runtime_dirs
 from core.srs_routes import router as srs_router  # NEW
 
-load_dotenv()
+ensure_runtime_dirs()
 
 app = FastAPI(title="NIARAD Agent API", version="3.1.0")
 
@@ -35,8 +38,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-os.makedirs("./generated_files", exist_ok=True)
-app.mount("/files", StaticFiles(directory="./generated_files"), name="files")
+os.makedirs(GENERATED_FILES_DIR, exist_ok=True)
+app.mount("/files", StaticFiles(directory=GENERATED_FILES_DIR), name="files")
 
 app.include_router(srs_router)  # NEW — /cards/* and /topics/* endpoints
 
@@ -127,7 +130,7 @@ async def chat(req: ChatRequest):
 
 @app.get("/files/list")
 def list_files():
-    files_dir = "./generated_files"
+    files_dir = GENERATED_FILES_DIR
     if not os.path.exists(files_dir):
         return {"files": []}
     files = [{"name": f, "url": "/files/" + f}

@@ -22,7 +22,9 @@ import sqlite3
 import datetime as dt
 from contextlib import contextmanager
 
-DB_PATH = os.getenv("NIARAD_SRS_DB", "./niarad_srs.db")
+from core.paths import SRS_DB_PATH
+
+DB_PATH = SRS_DB_PATH
 
 # ---- SM-2 tuning constants -------------------------------------------------
 MIN_EASE = 1.3          # ease factor floor (SM-2 standard)

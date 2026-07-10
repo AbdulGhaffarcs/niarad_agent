@@ -7,7 +7,9 @@ import hashlib
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-HASH_FILE = "./faiss_index/.indexed_hashes"
+from core.paths import FAISS_DIR
+
+HASH_FILE = os.path.join(FAISS_DIR, ".indexed_hashes")
 
 
 def _file_hash(path):

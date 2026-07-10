@@ -7,7 +7,9 @@ from langchain_core.tools import tool
 import os
 import re
 
-OUTPUT_DIR = "./generated_files"
+from core.paths import GENERATED_FILES_DIR
+
+OUTPUT_DIR = GENERATED_FILES_DIR
 
 
 def _ensure_dir():

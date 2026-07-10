@@ -6,7 +6,9 @@ import os
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
 
-DB_DIR = "./faiss_index"
+from core.paths import FAISS_DIR
+
+DB_DIR = FAISS_DIR
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 BATCH_SIZE = 32
 
