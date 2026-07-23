@@ -99,7 +99,7 @@ export default function Home() {
       <aside className={`rail ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <div className="brand">
           <h1>NIARAD</h1>
-          <span className="tag">v0.1</span>
+          <span className="tag">v3.0</span>
         </div>
         <nav className="nav">
           <button className={`nav-item ${tab === 'chat' ? 'active' : ''}`} onClick={() => setTab('chat')}>
