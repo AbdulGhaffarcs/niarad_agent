@@ -5,7 +5,7 @@
   
   <p><strong>Offline RAG-powered AI study companion with multi-tool agents and SM-2 spaced repetition.</strong></p>
 
-  [Live Demo](https://niarad-agent.vercel.app/) • [Source Code](https://github.com/AbdulGhaffarcs/niarad_agent)
+  [Live Demo](https://niarad-agent.vercel.app/) 
 </div>
 
 ---
@@ -40,11 +40,13 @@ Ask anything → the agent searches the web, executes code, reads your documents
 
 ---
 
-### Live Demo & Screenshots
+###  Screenshots
+<div align='center' >
+<img src="./home.png" width="50%" alt="home"/>  
+<img src="./chatWithAgent.jpeg" width="50%" alt="chatWindows"/>
+<img src="./studySec.png" width="50%" alt="study"/>
 
-[Try NIARAD Now →](https://niarad-agent.vercel.app/)
-
-
+</div>
 
 ---
 
